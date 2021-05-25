@@ -1,0 +1,157 @@
+<!doctype html>
+
+<html lang="zh-cmn-Hans">
+
+	<head>		<meta charset="utf-8">
+
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" />
+
+		<meta name="renderer" content="webkit" />
+
+		<meta name="force-rendering" content="webkit" />
+
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+		<!-- MDUI CSS -->
+
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/mdui@1.0.0/dist/css/mdui.min.css" integrity="sha384-2PJ2u4NYg6jCNNpv3i1hK9AoAqODy6CdiC+gYiL2DVx+ku5wzJMFNdE3RoWfBIRP"
+
+		 crossorigin="anonymous" />
+
+		<title>Hello, world!</title>
+
+	</head>
+
+	<body>
+
+		<div class="mdui-container mdui-theme-primary-teal mdui-theme-accent-blue">
+
+			<!-- 一行start -->
+
+			<div class="mdui-textfield">
+
+				<textarea id="inputContent" class="mdui-textfield-input" rows="4" placeholder="输入内容:"></textarea>
+
+			</div>
+
+			<button class="mdui-btn mdui-btn-raised mdui-ripple mdui-btn-block mdui-color-theme-accent" id="get">截取</button>
+
+			<button id="copy" style="margin-top: 10px;" class="mdui-btn mdui-btn-raised mdui-ripple mdui-btn-block mdui-color-theme">复制</button>
+
+			<div class="mdui-textfield">
+
+				<textarea id="export" class="mdui-textfield-input" disabled="disabled" rows="4" placeholder="输出内容:"></textarea>
+
+			</div>
+
+		</div>
+
+		<!-- 一行end -->
+
+		</div>
+
+		<!-- MDUI JavaScript -->
+
+		<script src="https://cdn.jsdelivr.net/npm/mdui@1.0.0/dist/js/mdui.min.js" integrity="sha384-aB8rnkAu/GBsQ1q6dwTySnlrrbhqDwrDnpVHR2Wgm8pWLbwUnzDcIROX3VvCbaK+"
+
+		 crossorigin="anonymous"></script>
+
+		<script>
+
+			var $ = mdui.$;
+
+			$(function() {
+
+				// 输入文本框
+
+				var inputContent = $('#inputContent');
+
+				var exportEl =$('#export');
+
+				// 点击截取的时候
+
+				$('#get').on('click', function() {
+
+					var val = inputContent.val();
+
+					// 找到key
+
+					var keyArr = val.match(/￥\w+\$/);
+
+					// 代表没找到
+
+					if (keyArr == null) return;
+
+					// 找到继续执行
+
+					// 拿到找到的值
+
+					var key = keyArr[0];
+
+					var result = '0/' + key.substr(1, key.length - 2) + '//';
+
+					// 给输出框
+
+					exportEl.val(result);
+
+				});
+
+				// 点击复制按钮
+
+				$('#copy').on('click', function() {
+
+					// 获取输出框
+
+					var val = exportEl.val();
+
+					// 输出框没有内容 终止
+
+					if(val.length == 0) return;
+
+					// 复制到剪贴板
+
+					copyToClip(val)
+
+					// 清空输出框 输入框
+
+					inputContent.val('');
+
+					exportEl.val('');
+
+				});
+
+			});
+
+			// 复制到剪贴板
+
+			function copyToClip(content) {
+
+				var aux = document.createElement("input");
+
+				aux.setAttribute("value", content);
+
+				document.body.appendChild(aux);
+
+				aux.select();
+
+				document.execCommand("copy");
+
+				document.body.removeChild(aux);
+
+				// 弹出提示框
+
+				mdui.snackbar({
+
+					message: '复制成功：' + content,
+
+					position: 'right-top'
+
+				});
+
+			}
+
+		</script>
+
+	</body>
+
+</html>
