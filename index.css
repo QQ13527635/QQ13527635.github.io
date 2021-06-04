@@ -17,7 +17,11 @@ body {
 	font-family: Arial, Helvetica;
 	background: #F8F8F8;
 }
-
+@media screen and (min-width: 778px) {
+    html {
+        font-size: 77.8px!important;
+    }
+}
 .top {
 	position: relative;
 	padding: 0 0.359897rem;
@@ -62,18 +66,20 @@ body {
 	font-size: 0.460796rem;
 }
 
+.info2_box {
+	position: absolute;
+	left: 0;
+	bottom: -2.570694rem;
+	padding: 0 0.359897rem;
+	width: 100%;
+	height: 3.676092rem;
+}
 .info2 {
 	display: flex;
-	position: absolute;
 	justify-content: space-between;
-	left: 50%;
-	bottom: -2.570694rem;
-	width: 9.190231rem;
-	height: 3.676092rem;
 	padding: 0.411311rem 0.70694rem;
 	background-color: #fff;
 	border-radius: 0.064267rem;
-	transform: translateX(-50%);
 	box-shadow: 0 0.128534rem 0.128534rem #F2E8E9;
 }
 .info2_cont {
