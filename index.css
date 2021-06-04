@@ -140,5 +140,6 @@ body {
 	width: 5.141388rem;
 	border: none;
 	font-size: 0.415167rem;
-	outline: none;
+	font-weight: bolder;
+    outline: none;
 }
